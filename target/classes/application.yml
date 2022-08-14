@@ -1,0 +1,23 @@
+server:
+  port: 80
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+      #db1是我众多数据库中，其中一个数据库的名称，db1里面很多表，在这我使用student表
+    url: jdbc:mysql://localhost:3306/db1
+    username: root
+    password: root
+    #这个是设置druid数据源 ,先要导druid依赖坐标
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto  #id自增
+  #打印日志Log到控制台输出
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
