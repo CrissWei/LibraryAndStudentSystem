@@ -1,4 +1,4 @@
-package com.example.sb_mp.bookDao;
+package com.example.sb_mp.bookDaoTest;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.sb_mp.Dao.BookDao;
 import com.example.sb_mp.Entity.Book;
-import com.example.sb_mp.Entity.Student;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -75,7 +74,7 @@ public class testBook {
     }
 
     /**
-     *不知道怎么更新
+     *不知道怎么更新  【原因：其实是表的id没有auto自增】
      */
     @Test
     void test8() {
@@ -105,7 +104,15 @@ public class testBook {
     void test10() { //成功
         QueryWrapper<Book> qw = new QueryWrapper<>();
         qw.like("name","数据"); //like %数据%
-        qw.gt("id","2");
+        qw.gt("id","2");//id>2的数据
+        bookDao.selectList(qw);
+    }
+
+    @Test
+    void test11() { //成功
+        String type = "计算机";
+        QueryWrapper<Book> qw = new QueryWrapper<>();
+        qw.like("type",type); //查询'计算机'类型的书籍
         bookDao.selectList(qw);
     }
 
@@ -113,10 +120,11 @@ public class testBook {
      * 为什么这个test11不行呢。前面的test10可以
      */
     @Test
-    void test11() {
-        String name = "数据";
+    void test12() {
+        String type = "计算机";
         LambdaQueryWrapper<Book> lqw = new LambdaQueryWrapper<>();
-        lqw.like(name!=null,Book::getName,"数据");//查询‘马’
+        //lqw.like(name!=null,Book::getName,"数据");
+        lqw.like(Book::getType,type);
         bookDao.selectList(lqw);
     }
 

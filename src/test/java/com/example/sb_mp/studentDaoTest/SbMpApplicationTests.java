@@ -1,4 +1,4 @@
-package com.example.sb_mp.daoTest;
+package com.example.sb_mp.studentDaoTest;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

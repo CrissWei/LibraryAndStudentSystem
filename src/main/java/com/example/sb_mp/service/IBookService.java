@@ -14,6 +14,8 @@ public interface IBookService extends IService<Book> {
      * 自定义一个分页操作
      */
     IPage<Book> getPage(Integer currentPage, Integer pageSize);
+    //这个方法是方面用户来做条件查询操作的
+    IPage<Book> getPage(Integer currentPage, Integer pageSize,Book book);
 
 
 }

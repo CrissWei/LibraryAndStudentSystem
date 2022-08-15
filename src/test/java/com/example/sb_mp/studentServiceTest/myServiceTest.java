@@ -1,4 +1,4 @@
-package com.example.sb_mp.serviceTest;
+package com.example.sb_mp.studentServiceTest;
 
 import com.example.sb_mp.Entity.Student;
 import com.example.sb_mp.service.StudentService;

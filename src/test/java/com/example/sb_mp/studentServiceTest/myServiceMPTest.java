@@ -1,4 +1,4 @@
-package com.example.sb_mp.serviceTest;
+package com.example.sb_mp.studentServiceTest;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -67,6 +67,13 @@ public class myServiceMPTest {
     public void test6(){
         IPage page = new Page(1,5);
         System.out.println(studentService.page(page));
+
+
+        System.out.println(page.getCurrent());
+        System.out.println(page.getSize());
+        System.out.println(page.getTotal());
+        System.out.println(page.getPages());
+        System.out.println(page.getRecords());
     }
 
     /**

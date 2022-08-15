@@ -1,6 +1,7 @@
 package com.example.sb_mp.Controller.real;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.example.sb_mp.Controller.utils.Result;
 import com.example.sb_mp.Entity.Book;
 import com.example.sb_mp.Entity.Student;
@@ -127,9 +128,28 @@ public class BookController {
     /**
      * 分页操作
      */
-    @GetMapping("{currentPage}/{pageSize}")
-    public Result getPage(@PathVariable Integer currentPage, @PathVariable Integer pageSize) {
-        //return service.getPage(currentPage,pageSize);
-        return new Result(true, service.getPage(currentPage, pageSize));
+//    @GetMapping("{currentPage}/{pageSize}")                    //这里添加一个Book，是为了模糊查询
+//    public Result getPage(@PathVariable Integer currentPage, @PathVariable Integer pageSize) {
+//        //return service.getPage(currentPage,pageSize);
+//
+//        //如果不做下面的if判断来处理小bug的话，做到这一步也是OK的.【下面的bug改了也不行】
+//        //return new Result(true, service.getPage(currentPage, pageSize));
+//
+////处理小bug:如果当前页码值大于了总页码值，那么重新执行查询操作，使用最大页码值作为当前页码值
+//        IPage<Book> page = service.getPage(currentPage, pageSize);
+//        if( currentPage > page.getPages()){
+//           page = service.getPage(currentPage, pageSize);
+//        }
+//        return new Result(true, page);
+//    }
+
+    @GetMapping("{currentPage}/{pageSize}")                    //这里添加一个Book，是为了模糊查询
+    public Result getPage(@PathVariable Integer currentPage, @PathVariable Integer pageSize,Book book) {
+        //System.out.println("前端页面用户输入的参数啊啊啊===>"+book);成功获取
+        IPage<Book> page = service.getPage(currentPage, pageSize,book);
+        if(currentPage > page.getPages()){
+            page = service.getPage(currentPage, pageSize,book);
+        }
+        return new Result(true, page);
     }
 }
